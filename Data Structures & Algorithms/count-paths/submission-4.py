@@ -1,0 +1,28 @@
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        '''memo = {}
+        def dfs(i, j):
+            if i == 0 and j ==0:
+                return 1
+            if i <0 or j < 0:
+                return 0 
+            if (i,j) in memo:
+                return memo[(i,j)]
+            up = dfs(i-1 , j)
+            left = dfs(i , j-1)
+            memo[(i,j)] = up + left 
+            return up + left
+        return dfs(m-1,n-1)
+        '''
+
+        #tabulation bottom-up
+        dp = [[0]*n for i in range(m)]
+        dp[0][0] = 1
+        for i in range(m):
+            for j in range(n):
+                if i == 0 and j == 0:
+                    continue
+                if 0<=i<m and 0<=j<n:
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        return dp[m-1][n-1]
+        
